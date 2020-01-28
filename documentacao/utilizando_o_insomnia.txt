@@ -1,0 +1,79 @@
+1)  Antes de criarmos as rotas de GET, POST, PUT e DELETE,
+    precisaremos utilizar um software para podemos testar essas rotas que serão criadas. 
+
+
+2)  A seguir criaremos nossa primeira requisição para 
+    testarmos a rota "/users" que acabamos de criar. 
+
+
+3)  Teremos que criar uma requisição através do Insomnia, 
+    que será do tipo GET.
+
+
+4)  Tendo criado a requisição, 
+    precisaremos informar qual é o endereço para onde faremos a requisição:
+
+    http://localhost:3000/users/1 
+
+    Ou seja, estaremos realizando uma requisição para 
+    buscar o usuário que tenha o id igual a 1.
+
+
+5)  A resposta que será retornada é um JSON:
+
+    {
+      message: Buscando o usuário: 1
+    }
+
+
+6)  Essa reposta será dinâmica porque declaramos uma 
+    constante que está capturando os route params:
+
+    const { id } = req.params;
+
+    Portanto toda vez que uma requisição for disparada
+    carregando um query param no endereço,
+    ele será retornado dinamicamente no JSON:
+    http://localhost:3000/1
+
+
+7)  Se reparamos bem no HTTP Code exibido pelo Insmonia, 
+    perceberemos que ele retornou um código 200, 
+    já que nossa requisição foi bem sucedida. 
+
+    Logo ao lado teremos o tempo em que 
+    a resposta da requisição demorou pra ser entregue ao cliente. 
+
+    E logo ao lado temos o tamanho/peso dessa requsição.
+
+
+8)  Como ainda não utilizaremos o banco de dados para 
+    armazenar os dados da nossa API que está sendo construída, 
+    faremos isso através de uma constante, 
+    atribuindo alguns nomes.
+
+    const users = ['Yago', 'Vithor', 'Isadora'];
+
+
+9)  Agora ao invés de capturarmos o id do usuário pelo endereço, 
+    iremos capturar o índice para acessarmos uma determinada posição desse array, 
+    consequentemente retornando o usuário que se encontra nesse posição. 
+
+    // declarando que o endereço da rota irá receber um parâmetro chamado :index
+    server.get('/users/:index')
+
+    // utilizando desestruturação para pegar o parâmetro index do endereço da rota ele armazenar-lo em uma constante:
+    const { index } = req.params;
+
+  
+10) Agora no retorno da rota, 
+    iremos retornar a constante users,
+    acessando o índice que foi passado por parâmetro:
+
+    return res.json(users[index]);
+
+
+11) Agora já podemos utilizar o Insmonia para passar o parâmetro no endereço.
+
+    Se o parâmetro não ultrapassar o índice dos usuários presentes no array, 
+    teremos um JSON sendo retornado com o nome do usuário.
